@@ -19,22 +19,42 @@ end
 
 function MainScene:setupTestMenu()
 
+    local postNotificationTest = function() end
+
+    local menu = cc.Menu:create()
+
+    local label1 = cc.Label:createWithSystemFont("post notification lua", "sans", 28)
+    local item1 = cc.MenuItemLabel:create(label1)
+    item1:onClicked(function()
+        postNotificationTest()
+    end)
+    menu:addChild(item1)
+
+    local item2 = cc.MenuItemFont:create("<null>")
+    item2:setEnabled(false)
+    menu:addChild(item2)
+
+    menu:alignItemsVerticallyWithPadding(24)
+    self:addChild(menu)
+
+    -- plugin
     require "json"
     sdkbox.PluginOneSignal:init()
     sdkbox.PluginOneSignal:setListener(function ( args )
-        dump(args)
-        local event = args.event
-        if "onSendTag" == event then
-            print(args.success, args.key, args.message)
-        elseif "onGetTags" == event then
-            dump(json.decode(args.jsonString))
-        elseif "onIdsAvailable" == event then
-            print(args.userId, args.pushToken)
-        elseif "onPostNotification" == event then
-            print(args.success, args.message)
-        elseif "onNotification" == event then
-            print(args.isActive, args.message, args.additionalData)
-        end
+      dump(args)
+      local event = args.event
+      if "onSendTag" == event then
+        print(args.success, args.key, args.message)
+      elseif "onGetTags" == event then
+        dump(json.decode(args.jsonString))
+      elseif "onIdsAvailable" == event then
+        print(args.userId, args.pushToken)
+        item2:setString(args.userId)
+      elseif "onPostNotification" == event then
+        print(args.success, args.message)
+      elseif "onNotification" == event then
+        print(args.isActive, args.message, args.additionalData)
+      end
     end)
 
     sdkbox.PluginOneSignal:setSubscription(true)
@@ -45,9 +65,9 @@ function MainScene:setupTestMenu()
     sdkbox.PluginOneSignal:deleteTag("key")
     sdkbox.PluginOneSignal:idsAvailable()
     sdkbox.PluginOneSignal:enableInAppAlertNotification(true)
+    sdkbox.PluginOneSignal:promptLocation()
 
-    local postNotificationTest = function ()
-
+    postNotificationTest = function ()
         -- https://documentation.onesignal.com/v2.0/docs/notifications-create-notification
         local data = {
             contents = {
@@ -64,21 +84,8 @@ function MainScene:setupTestMenu()
         }
         sdkbox.PluginOneSignal:postNotification(json.encode(data))
     end
-
     postNotificationTest()
-    sdkbox.PluginOneSignal:promptLocation()
 
-    local menu = cc.Menu:create()
-
-    local label1 = cc.Label:createWithSystemFont("post notification lua", "sans", 28)
-    local item1 = cc.MenuItemLabel:create(label1)
-    item1:onClicked(function()
-        postNotificationTest()
-    end)
-    menu:addChild(item1)
-
-    menu:alignItemsVerticallyWithPadding(24)
-    self:addChild(menu)
 end
 
 return MainScene
