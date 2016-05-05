@@ -16,6 +16,8 @@ static std::string USER_ID =
 "";
 #endif
 
+std::function<void(const std::string&)> update_user_id_fun = NULL;
+
 class CustomListener : public sdkbox::OneSignalListener {
 public:
 
@@ -31,6 +33,10 @@ public:
     void onIdsAvailable(const std::string& userId, const std::string& pushToken) {
         CCLOG("%s: userId='%s', pushToken='%s'", __FUNCTION__, userId.c_str(), pushToken.c_str());
         USER_ID = userId;
+
+        if (update_user_id_fun != NULL) {
+            update_user_id_fun(userId);
+        }
     }
     void onPostNotification(bool success, const std::string& message) {
         CCLOG("%s: success=%s, message=%s", __FUNCTION__, success ? "yes" : "no", message.c_str());
@@ -92,18 +98,6 @@ bool HelloWorld::init()
 
 void HelloWorld::createTestMenu()
 {
-    sdkbox::PluginOneSignal::setListener(new CustomListener());
-    sdkbox::PluginOneSignal::init();
-
-    sdkbox::PluginOneSignal::setSubscription(true);
-    sdkbox::PluginOneSignal::setEmail("test@example.com");
-    sdkbox::PluginOneSignal::sendTag("key", "value");
-    sdkbox::PluginOneSignal::sendTag("key1", "value1");
-    sdkbox::PluginOneSignal::getTags();
-    //    sdkbox::PluginOneSignal::deleteTag("key");
-    sdkbox::PluginOneSignal::idsAvailable();
-    sdkbox::PluginOneSignal::enableInAppAlertNotification(true);
-
     auto postNotificationTest = []() {
 
         // content
@@ -134,17 +128,39 @@ void HelloWorld::createTestMenu()
         sdkbox::PluginOneSignal::postNotification(v.serialize());
     };
 
-    postNotificationTest();
-    sdkbox::PluginOneSignal::promptLocation();
     // ui
     auto size = Director::getInstance()->getWinSize();
-    auto menu = Menu::create(
-                             MenuItemFont::create("post notification", [=](Ref*) {
+    auto menu = Menu::create();
+
+    auto menuItem = MenuItemFont::create("post notification", [=](Ref*) {
         postNotificationTest();
-    }),
-                             NULL
-                             );
+    });
+    menu->addChild(menuItem);
+
+    auto userIdMenu = MenuItemFont::create("<null>", NULL);
+    userIdMenu->setEnabled(false);
+    menu->addChild(userIdMenu);
+
+    update_user_id_fun = std::bind(&MenuItemFont::setString, userIdMenu, std::placeholders::_1);
+
+    menu->alignItemsVerticallyWithPadding(20);
     menu->setPosition(size / 2);
     addChild(menu);
+
+    // plugin
+    sdkbox::PluginOneSignal::setListener(new CustomListener());
+    sdkbox::PluginOneSignal::init();
+
+    sdkbox::PluginOneSignal::setSubscription(true);
+    sdkbox::PluginOneSignal::setEmail("test@example.com");
+    sdkbox::PluginOneSignal::sendTag("key", "value");
+    sdkbox::PluginOneSignal::sendTag("key1", "value1");
+    sdkbox::PluginOneSignal::getTags();
+    //    sdkbox::PluginOneSignal::deleteTag("key");
+    sdkbox::PluginOneSignal::idsAvailable();
+    sdkbox::PluginOneSignal::enableInAppAlertNotification(true);
+    sdkbox::PluginOneSignal::promptLocation();
+
+    postNotificationTest();
 }
 
