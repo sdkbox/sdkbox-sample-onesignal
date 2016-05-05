@@ -22,11 +22,36 @@ var HelloWorldLayer = cc.Layer.extend({
     },
 
     createTestMenu:function() {
+        var self = this;
+        self.postNotificationTest = function() {}
+
+        var menu = new cc.Menu();
+
+        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("post notification js", "sans", 28), function() {
+            self.postNotificationTest();
+        });
+        menu.addChild(item1);
+
+        var item2 = new cc.MenuItemFont("<null>");
+        item2.setEnabled(false);
+        menu.addChild(item2);
+        self.item2 = item2;
+
+        var winsize = cc.winSize;
+        menu.x = winsize.width / 2;
+        menu.y = winsize.height / 2;
+        menu.alignItemsVerticallyWithPadding(20);
+        this.addChild(menu);
+
+        // plugin
         sdkbox.PluginOneSignal.init();
         sdkbox.PluginOneSignal.setListener({
             onSendTag :function (success, key, message) { cc.log("onSendTag success=%s, key=%s, message=%s", success ? "yes" : "no", key, message); },
             onGetTags :function (jsonString) { cc.log("onGetTags tags=%s", jsonString); },
-            onIdsAvailable :function (userId,  pushToken) { cc.log("onIdsAvailable userId=%d, pushToken=%s", userId, pushToken); },
+            onIdsAvailable :function (userId,  pushToken) {
+                cc.log("onIdsAvailable userId=%d, pushToken=%s", userId, pushToken);
+                self.item2.setString(userId)
+            },
             onPostNotification :function (success,  message) { cc.log("onPostNotification success=%s, message=%s", success ? "yes" : "no", message); },
             onNotification :function (isActive,  message, additionalData) { cc.log("onNotification isActive=%s, message=%s, additionalData=%s", isActive?"yes":"no", message, additionalData); }
         });
@@ -41,7 +66,6 @@ var HelloWorldLayer = cc.Layer.extend({
         sdkbox.PluginOneSignal.enableInAppAlertNotification(true);
         sdkbox.PluginOneSignal.promptLocation();
 
-        var self = this;
         self.postNotificationTest = function() {
             var data = {
                 "contents": {
@@ -61,19 +85,6 @@ var HelloWorldLayer = cc.Layer.extend({
         };
 
         self.postNotificationTest();
-
-        var menu = new cc.Menu();
-
-        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("post notification js", "sans", 28), function() {
-            self.postNotificationTest();
-        });
-        menu.addChild(item1);
-
-        var winsize = cc.winSize;
-        menu.x = winsize.width / 2;
-        menu.y = winsize.height / 2;
-        menu.alignItemsVerticallyWithPadding(20);
-        this.addChild(menu);
     }
 });
 
