@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007E4E5B8A997508CD0097B8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC44EC281397385ED8C0FF8 /* SystemConfiguration.framework */; };
+		0C7841FCBAF06A0BFE93B4C7 /* SDKBoxJSHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29BE4767A1559996B950D161 /* SDKBoxJSHelper.cpp */; };
 		1A82F5FB169AC92500C4B13A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A82F5FA169AC92500C4B13A /* libsqlite3.dylib */; };
 		1AD7E0A818C9DB93004817A6 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 1A6BF21418C9DB5900FB0E1C /* main.js */; };
 		1AE159EC18C9DF3600FCA372 /* project.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A081B18C9DF05005C6854 /* project.json */; };
+		20814C19877F692F1EA0FDB7 /* PluginOneSignalJS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BD04F86A269D98795BD45F0 /* PluginOneSignalJS.cpp */; };
 		28614A5582EFCDE41E6DCD96 /* libjscocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25314D7F96A5964397743D54 /* libjscocos2d iOS.a */; };
+		370D4BB681BF86EAEE52122C /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6A4BDAA6CFE1048F0E6F92 /* OneSignal.framework */; };
 		498B452C9E98B6E14A9B86D2 /* script in Resources */ = {isa = PBXBuildFile; fileRef = 671A491884E0C7533ED0085C /* script */; };
 		5091731A17ECDF7A00D62437 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 5091731417ECDF7A00D62437 /* Icon-29.png */; };
 		5091731B17ECDF7A00D62437 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 5091731517ECDF7A00D62437 /* Icon-40.png */; };
@@ -44,22 +48,30 @@
 		A922754E1517C094001B78AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A922754D1517C094001B78AA /* Foundation.framework */; };
 		A92275501517C094001B78AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A922754F1517C094001B78AA /* CoreGraphics.framework */; };
 		ADA4461682F4B8DA681731C5 /* libsimulator iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4942DC89CF5E304809354C /* libsimulator iOS.a */; };
+		ADCE4FECA26BBAF42B222034 /* PluginOneSignalJSHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1901417B8549465FE47D78D2 /* PluginOneSignalJSHelper.cpp */; };
 		BA4E718719EB6E7900932425 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4E718619EB6E7900932425 /* MediaPlayer.framework */; };
 		C03780EB18BEE0E400FE4F13 /* src in Resources */ = {isa = PBXBuildFile; fileRef = C03780EA18BEE0E400FE4F13 /* src */; };
 		C05D1C171923467600B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C161923467600B808A4 /* config.json */; };
 		C0799CB918BAE62000E9C828 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C0799CB518BAE62000E9C828 /* res */; };
+		CF4A4163BE51F14A451CDCC3 /* sdkbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA94787BD36FC92E750550C /* sdkbox.framework */; };
 		D454520C156E22BD00887EB5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D454520B156E22BD00887EB5 /* libz.dylib */; };
 		D4545227156E28EF00887EB5 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4545215156E28EF00887EB5 /* AppDelegate.cpp */; };
 		D6B061241803AB9F0077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061231803AB9F0077942B /* CoreMotion.framework */; };
 		ED545A901B68A25E00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A8F1B68A25E00C3958E /* libiconv.dylib */; };
+		F10648BC998F77FA56F72140 /* PluginOneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCC4F8B81F5D7DD5AA2920E /* PluginOneSignal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1901417B8549465FE47D78D2 /* PluginOneSignalJSHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginOneSignalJSHelper.cpp; path = ../Classes/PluginOneSignalJSHelper.cpp; sourceTree = SOURCE_ROOT; };
 		1A1A081B18C9DF05005C6854 /* project.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = project.json; path = ../../../project.json; sourceTree = "<group>"; };
 		1A6BF21418C9DB5900FB0E1C /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = main.js; path = ../../../main.js; sourceTree = "<group>"; };
 		1A82F5FA169AC92500C4B13A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		1A96A4F2174A3432008653A9 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/cocos2dx/platform/third_party/ios/libraries/libcurl.a"; sourceTree = "<group>"; };
+		1F6A4BDAA6CFE1048F0E6F92 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = SOURCE_ROOT; };
+		20E546789165ED24B4B1551D /* PluginOneSignalJSHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginOneSignalJSHelper.h; path = ../Classes/PluginOneSignalJSHelper.h; sourceTree = SOURCE_ROOT; };
 		25314D7F96A5964397743D54 /* libjscocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libjscocos2d iOS.a"; path = "$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios/libjscocos2d iOS.a"; sourceTree = "<absolute>"; };
+		29BE4767A1559996B950D161 /* SDKBoxJSHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SDKBoxJSHelper.cpp; path = ../Classes/SDKBoxJSHelper.cpp; sourceTree = SOURCE_ROOT; };
+		4DC44EC281397385ED8C0FF8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		502380DB17EBB88200990C9B /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		5091731417ECDF7A00D62437 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29.png"; path = "ios/Icon-29.png"; sourceTree = "<group>"; };
 		5091731517ECDF7A00D62437 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-40.png"; path = "ios/Icon-40.png"; sourceTree = "<group>"; };
@@ -88,8 +100,11 @@
 		509D4AE817EBB82000697056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		509D4AEA17EBB82600697056 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		526041819F61614826BB19BD /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios/libcocos2d iOS.a"; sourceTree = "<absolute>"; };
+		5BCC4F8B81F5D7DD5AA2920E /* PluginOneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginOneSignal.framework; sourceTree = SOURCE_ROOT; };
+		63124F54AB6315F36E3847FB /* PluginOneSignalJS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginOneSignalJS.hpp; path = ../Classes/PluginOneSignalJS.hpp; sourceTree = SOURCE_ROOT; };
 		671A491884E0C7533ED0085C /* script */ = {isa = PBXFileReference; lastKnownFileType = "?"; name = script; path = ../../../script; sourceTree = "<group>"; };
 		87D4C4441AB2187000F68C44 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8BD04F86A269D98795BD45F0 /* PluginOneSignalJS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginOneSignalJS.cpp; path = ../Classes/PluginOneSignalJS.cpp; sourceTree = SOURCE_ROOT; };
 		9F20C9E11A5BBE85006FB50B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		9FFEB99F1A6AB7F70095C43A /* CodeIDESupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeIDESupport.h; sourceTree = "<group>"; };
 		9FFEB9A01A6AB7F70095C43A /* lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lang; sourceTree = "<group>"; };
@@ -118,6 +133,8 @@
 		DB4942DC89CF5E304809354C /* libsimulator iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsimulator iOS.a"; path = "$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios/libsimulator iOS.a"; sourceTree = "<absolute>"; };
 		ED545A8F1B68A25E00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A911B68A26600C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		F75E4290B24D71A71D941B6A /* SDKBoxJSHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SDKBoxJSHelper.h; path = ../Classes/SDKBoxJSHelper.h; sourceTree = SOURCE_ROOT; };
+		FAA94787BD36FC92E750550C /* sdkbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = sdkbox.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +159,10 @@
 				6E144EF4830450EE49A515AF /* libcocos2d iOS.a in Frameworks */,
 				28614A5582EFCDE41E6DCD96 /* libjscocos2d iOS.a in Frameworks */,
 				ADA4461682F4B8DA681731C5 /* libsimulator iOS.a in Frameworks */,
+				CF4A4163BE51F14A451CDCC3 /* sdkbox.framework in Frameworks */,
+				F10648BC998F77FA56F72140 /* PluginOneSignal.framework in Frameworks */,
+				370D4BB681BF86EAEE52122C /* OneSignal.framework in Frameworks */,
+				007E4E5B8A997508CD0097B8 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +258,10 @@
 				A922754B1517C094001B78AA /* UIKit.framework */,
 				A922754D1517C094001B78AA /* Foundation.framework */,
 				A922754F1517C094001B78AA /* CoreGraphics.framework */,
+				FAA94787BD36FC92E750550C /* sdkbox.framework */,
+				5BCC4F8B81F5D7DD5AA2920E /* PluginOneSignal.framework */,
+				1F6A4BDAA6CFE1048F0E6F92 /* OneSignal.framework */,
+				4DC44EC281397385ED8C0FF8 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -284,6 +309,12 @@
 				9FFEB9A71A6AB7F70095C43A /* js_module_register.h */,
 				D4545215156E28EF00887EB5 /* AppDelegate.cpp */,
 				D4545216156E28EF00887EB5 /* AppDelegate.h */,
+				8BD04F86A269D98795BD45F0 /* PluginOneSignalJS.cpp */,
+				63124F54AB6315F36E3847FB /* PluginOneSignalJS.hpp */,
+				1901417B8549465FE47D78D2 /* PluginOneSignalJSHelper.cpp */,
+				20E546789165ED24B4B1551D /* PluginOneSignalJSHelper.h */,
+				29BE4767A1559996B950D161 /* SDKBoxJSHelper.cpp */,
+				F75E4290B24D71A71D941B6A /* SDKBoxJSHelper.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -317,6 +348,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					A922753C1517C094001B78AA = {
+						DevelopmentTeam = LNN652W6T6;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = A92275371517C094001B78AA /* Build configuration list for PBXProject "onesignal_js" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -396,6 +440,9 @@
 				509D4AC817EBB2AB00697056 /* main.m in Sources */,
 				9FFEB9C21A6B86360095C43A /* SimpleConfigParser.cpp in Sources */,
 				509D4ABC17EBB2AB00697056 /* AppController.mm in Sources */,
+				20814C19877F692F1EA0FDB7 /* PluginOneSignalJS.cpp in Sources */,
+				ADCE4FECA26BBAF42B222034 /* PluginOneSignalJSHelper.cpp in Sources */,
+				0C7841FCBAF06A0BFE93B4C7 /* SDKBoxJSHelper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +508,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -476,8 +524,15 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = " $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios",
+					"\"sdkbox.framework\"",
+					"\"PluginOneSignal.framework\"",
+					"\"OneSignal.framework\"",
+				);
+				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdkbox.sample.onesignaltest;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/cocos $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/cocos/platform/ios $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/external/spidermonkey/include/ios $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/plugin/jsbindings/auto $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/plugin/jsbindings/manual $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/external/curl/include/ios";
@@ -492,6 +547,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -507,8 +563,15 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = " $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/prebuilt/ios",
+					"\"sdkbox.framework\"",
+					"\"PluginOneSignal.framework\"",
+					"\"OneSignal.framework\"",
+				);
+				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdkbox.sample.onesignaltest;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/cocos $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/cocos/platform/ios $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/external/spidermonkey/include/ios $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/plugin/jsbindings/auto $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/plugin/jsbindings/manual $(SRCROOT)/../../../../../sdkbox-cocos2d-x-binary/external/curl/include/ios";
