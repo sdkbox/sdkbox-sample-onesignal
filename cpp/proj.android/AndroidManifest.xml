@@ -27,14 +27,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.com.sdkbox.sample.onesignal.cpp.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.com.sec.android.provider.badge.permission.READ" />
-    <uses-permission android:name="android.permission.com.sec.android.provider.badge.permission.WRITE" />
-    <uses-permission android:name="android.permission.com.htc.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.com.htc.launcher.permission.UPDATE_SHORTCUT" />
-    <uses-permission android:name="android.permission.com.sonyericsson.home.permission.BROADCAST_BADGE" />
-    <uses-permission android:name="android.permission.com.anddoes.launcher.permission.UPDATE_COUNT" />
-    <uses-permission android:name="android.permission.com.majeur.launcher.permission.UPDATE_BADGE" />
+    <uses-permission android:name="com.sdkbox.sample.onesignal.cpp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" />
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" />
     <permission android:name="com.sdkbox.sample.onesignal.cpp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 </manifest>

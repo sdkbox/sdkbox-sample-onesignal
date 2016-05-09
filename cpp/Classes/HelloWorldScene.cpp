@@ -151,6 +151,7 @@ void HelloWorld::createTestMenu()
     sdkbox::PluginOneSignal::setListener(new CustomListener());
     sdkbox::PluginOneSignal::init();
 
+//    sdkbox::PluginOneSignal::setLogLevel(sdkbox::OneSignalLogVerbose, sdkbox::OneSignalLogVerbose);
     sdkbox::PluginOneSignal::setSubscription(true);
     sdkbox::PluginOneSignal::setEmail("test@example.com");
     sdkbox::PluginOneSignal::sendTag("key", "value");

@@ -3,16 +3,17 @@
         "OneSignal": {
             "sound": false, 
             "vibrate": false, 
-            "project_number": "9a4c9936-62e8-4473-9456-77c50d551870", 
+            "project_number": "e1115f93-a345-4777-987a-98df9f88f5e4", 
             "debug": true, 
             "notifications_when_active": false, 
-            "id": "517386718969"
+            "id": "249940245566"
         }
     }, 
     "ios": {
         "OneSignal": {
             "debug": false, 
-            "id": "b9c7cd2f-4fe7-4808-b170-f6a3bda32232"
+            "id": "b9c7cd2f-4fe7-4808-b170-f6a3bda32232", 
+            "auto_register": true
         }
     }
 }
