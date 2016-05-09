@@ -3,10 +3,10 @@
         "OneSignal": {
             "sound": false,
             "vibrate": false,
-            "project_number": "767edbe8-7d73-49a7-b2a0-2dd5ec5eb0bc",
+            "project_number": "689206166553",
             "debug": true,
             "notifications_when_active": false,
-            "id": "689206166553"
+            "id": "767edbe8-7d73-49a7-b2a0-2dd5ec5eb0bc"
         }
     },
     "ios": {
