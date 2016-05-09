@@ -7,7 +7,7 @@
 #ifndef _CC_SDKBOX_H_
 #define _CC_SDKBOX_H_
 
-#define SDKBOX_VERSION_STR  "sdkbox V2.2.1.0"
+#define SDKBOX_VERSION_STR  "sdkbox V2.2.1.1"
 
 /**
  * Only certain compilers support __attribute__((deprecated)).
@@ -110,6 +110,7 @@ namespace sdkbox {
         std::string image;
         std::string link;
         SocialPlatform platform;
+        bool showDialog;
     };
 }
 

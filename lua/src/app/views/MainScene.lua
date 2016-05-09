@@ -37,9 +37,18 @@ function MainScene:setupTestMenu()
     menu:alignItemsVerticallyWithPadding(24)
     self:addChild(menu)
 
+    local userId = "5ea075c5-016d-4f55-891c-3b6c4b393e49"
     -- plugin
     require "json"
     sdkbox.PluginOneSignal:init()
+    -- sdkbox.PluginOneSignal.LogLevel.None
+    -- sdkbox.PluginOneSignal.LogLevel.Fatal
+    -- sdkbox.PluginOneSignal.LogLevel.Error
+    -- sdkbox.PluginOneSignal.LogLevel.Warn
+    -- sdkbox.PluginOneSignal.LogLevel.Info
+    -- sdkbox.PluginOneSignal.LogLevel.Debug
+    -- sdkbox.PluginOneSignal.LogLevel.Verbose
+    -- sdkbox.PluginOneSignal:setLogLevel(sdkbox.PluginOneSignal.LogLevel.Verbose, sdkbox.PluginOneSignal.LogLevel.Verbose)
     sdkbox.PluginOneSignal:setListener(function ( args )
       dump(args)
       local event = args.event
@@ -49,6 +58,7 @@ function MainScene:setupTestMenu()
         dump(json.decode(args.jsonString))
       elseif "onIdsAvailable" == event then
         print(args.userId, args.pushToken)
+        userId = args.userId
         item2:setString(args.userId)
       elseif "onPostNotification" == event then
         print(args.success, args.message)
@@ -71,15 +81,15 @@ function MainScene:setupTestMenu()
         -- https://documentation.onesignal.com/v2.0/docs/notifications-create-notification
         local data = {
             contents = {
-                en = "Test Message"
+                en = "Test Message Lua"
             },
             data = {
                 foo = "bar"
             },
             include_player_ids = {
-                "5ea075c5-016d-4f55-891c-3b6c4b393e49",
+                userId,
                 "4db7cb0f-daca-49d6-b3dd-a96774de9f72",
-                "33ad9d96-df00-42a2-b5ab-73417f777d42","5ea075c5-016d-4f55-891c-3b6c4b393e49"
+                "33ad9d96-df00-42a2-b5ab-73417f777d42",
             }
         }
         sdkbox.PluginOneSignal:postNotification(json.encode(data))
