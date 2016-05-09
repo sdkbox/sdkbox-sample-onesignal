@@ -45,11 +45,19 @@ var HelloWorldLayer = cc.Layer.extend({
 
         // plugin
         sdkbox.PluginOneSignal.init();
+        // sdkbox.PluginOneSignal.LogLevel.None
+        // sdkbox.PluginOneSignal.LogLevel.Fatal
+        // sdkbox.PluginOneSignal.LogLevel.Error
+        // sdkbox.PluginOneSignal.LogLevel.Warn
+        // sdkbox.PluginOneSignal.LogLevel.Info
+        // sdkbox.PluginOneSignal.LogLevel.Debug
+        // sdkbox.PluginOneSignal.LogLevel.Verbose
+        // sdkbox.PluginOneSignal.setLogLevel(sdkbox.PluginOneSignal.LogLevel.Verbose, sdkbox.PluginOneSignal.LogLevel.Verbose);
         sdkbox.PluginOneSignal.setListener({
             onSendTag :function (success, key, message) { cc.log("onSendTag success=%s, key=%s, message=%s", success ? "yes" : "no", key, message); },
             onGetTags :function (jsonString) { cc.log("onGetTags tags=%s", jsonString); },
             onIdsAvailable :function (userId,  pushToken) {
-                cc.log("onIdsAvailable userId=%d, pushToken=%s", userId, pushToken);
+                cc.log("onIdsAvailable userId=%s, pushToken=%s", userId, pushToken);
                 self.item2.setString(userId)
             },
             onPostNotification :function (success,  message) { cc.log("onPostNotification success=%s, message=%s", success ? "yes" : "no", message); },
