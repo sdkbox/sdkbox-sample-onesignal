@@ -1,14 +1,18 @@
 #include "PluginOneSignalJSHelper.h"
-#include "cocos2d_specifics.hpp"
 #include "PluginOneSignal/PluginOneSignal.h"
 #include "SDKBoxJSHelper.h"
-
-#include "js_manual_conversions.h"
 
 extern JSObject* jsb_sdkbox_PluginOneSignal_prototype;
 static JSContext* s_cx = nullptr;
 
-class OneSignal_CallbackJS: public cocos2d::CCObject {
+#if (COCOS2D_VERSION < 0x00030000)
+#define Ref CCObject
+#define Director CCDirector
+#define getInstance sharedDirector
+#define schedule scheduleSelector
+#endif
+
+class OneSignal_CallbackJS: public cocos2d::Ref {
 public:
     OneSignal_CallbackJS();
     void schedule();
@@ -20,16 +24,10 @@ public:
     int _paramLen;
 };
 
-class OneSignalListenerJS : public sdkbox::OneSignalListener {
-private:
-    JSObject* _JSDelegate;
+class OneSignalListenerJS : public sdkbox::OneSignalListener, public sdkbox::JSListenerBase
+{
 public:
-    void setJSDelegate(JSObject* delegate) {
-        _JSDelegate = delegate;
-    }
-
-    JSObject* getJSDelegate() {
-        return _JSDelegate;
+    OneSignalListenerJS():sdkbox::JSListenerBase() {
     }
 
     void onSendTag(bool success, const std::string& key, const std::string& message) {
@@ -80,7 +78,7 @@ public:
         }
         JSContext* cx = s_cx;
         const char* func_name = func;
-        JS::RootedObject obj(cx, _JSDelegate);
+        JS::RootedObject obj(cx, getJSDelegate());
         JSAutoCompartment ac(cx, obj);
 
 #if defined(MOZJS_MAJOR_VERSION)
@@ -132,7 +130,7 @@ _paramLen(0) {
 
 void OneSignal_CallbackJS::schedule() {
     retain();
-    cocos2d::CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(OneSignal_CallbackJS::notityJs), this, 0.1, false);
+    cocos2d::Director::getInstance()->getScheduler()->schedule(schedule_selector(OneSignal_CallbackJS::notityJs), this, 0.1, 0, 0.0f, false);
     autorelease();
 }
 
@@ -142,7 +140,6 @@ void OneSignal_CallbackJS::notityJs(float dt) {
     if (l) {
         l->invokeJS(_name.c_str(), _paramVal, _paramLen);
     }
-    cocos2d::CCDirector::sharedDirector()->getScheduler()->unscheduleAllForTarget(this);
     release();
 }
 
@@ -166,11 +163,10 @@ JSBool js_PluginOneSignalJS_PluginOneSignal_setListener(JSContext *cx, uint32_t 
         {
             ok = false;
         }
-        JSObject *tmpObj = args.get(0).toObjectOrNull();
 
         JSB_PRECONDITION2(ok, cx, false, "js_PluginOneSignalJS_PluginOneSignal_setIAPListener : Error processing arguments");
         OneSignalListenerJS* wrapper = new OneSignalListenerJS();
-        wrapper->setJSDelegate(tmpObj);
+        wrapper->setJSDelegate(args.get(0));
         sdkbox::PluginOneSignal::setListener(wrapper);
 
         args.rval().setUndefined();
