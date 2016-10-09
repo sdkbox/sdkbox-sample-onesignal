@@ -1,8 +1,6 @@
 
 #include "PluginOneSignalLuaHelper.h"
 #include "PluginOneSignal/PluginOneSignal.h"
-#include "CCLuaEngine.h"
-#include "tolua_fix.h"
 #include "SDKBoxLuaHelper.h"
 
 class OneSignalListenerLua : public sdkbox::OneSignalListener {
