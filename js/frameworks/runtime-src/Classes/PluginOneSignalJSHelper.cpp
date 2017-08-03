@@ -1,14 +1,18 @@
 #include "PluginOneSignalJSHelper.h"
-#include "cocos2d_specifics.hpp"
 #include "PluginOneSignal/PluginOneSignal.h"
 #include "SDKBoxJSHelper.h"
-
-#include "js_manual_conversions.h"
 
 extern JSObject* jsb_sdkbox_PluginOneSignal_prototype;
 static JSContext* s_cx = nullptr;
 
-class OneSignal_CallbackJS: public cocos2d::CCObject {
+#if (COCOS2D_VERSION < 0x00030000)
+#define Ref CCObject
+#define Director CCDirector
+#define getInstance sharedDirector
+#define schedule scheduleSelector
+#endif
+
+class OneSignal_CallbackJS: public cocos2d::Ref {
 public:
     OneSignal_CallbackJS();
     void schedule();
@@ -16,71 +20,100 @@ public:
 
     std::string _name;
 
-    jsval _paramVal[3];
+    JS::Value _paramVal[3];
     int _paramLen;
 };
 
-class OneSignalListenerJS : public sdkbox::OneSignalListener {
-private:
-    JSObject* _JSDelegate;
+class OneSignalListenerJS : public sdkbox::OneSignalListener, public sdkbox::JSListenerBase
+{
 public:
-    void setJSDelegate(JSObject* delegate) {
-        _JSDelegate = delegate;
-    }
-
-    JSObject* getJSDelegate() {
-        return _JSDelegate;
+    OneSignalListenerJS():sdkbox::JSListenerBase() {
     }
 
     void onSendTag(bool success, const std::string& key, const std::string& message) {
         OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
         cb->_name = "onSendTag";
-        cb->_paramVal[0] = BOOLEAN_TO_JSVAL(success);
-        cb->_paramVal[1] = std_string_to_jsval(s_cx, key);
-        cb->_paramVal[2] = std_string_to_jsval(s_cx, message);
+        cb->_paramVal[0] = JS::BooleanValue(success);
+        cb->_paramVal[1] = SB_STR_TO_JSVAL(s_cx, key);
+        cb->_paramVal[2] = SB_STR_TO_JSVAL(s_cx, message);
         cb->_paramLen = 3;
         cb->schedule();
     }
     void onGetTags(const std::string& jsonString) {
         OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
         cb->_name = "onGetTags";
-        cb->_paramVal[0] = std_string_to_jsval(s_cx, jsonString);
+        cb->_paramVal[0] = SB_STR_TO_JSVAL(s_cx, jsonString);
         cb->_paramLen = 1;
         cb->schedule();
     }
     void onIdsAvailable(const std::string& userId, const std::string& pushToken) {
         OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
         cb->_name = "onIdsAvailable";
-        cb->_paramVal[0] = std_string_to_jsval(s_cx, userId);
-        cb->_paramVal[1] = std_string_to_jsval(s_cx, pushToken);
+        cb->_paramVal[0] = SB_STR_TO_JSVAL(s_cx, userId);
+        cb->_paramVal[1] = SB_STR_TO_JSVAL(s_cx, pushToken);
         cb->_paramLen = 2;
         cb->schedule();
     }
     void onPostNotification(bool success, const std::string& message) {
         OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
         cb->_name = "onPostNotification";
-        cb->_paramVal[0] = BOOLEAN_TO_JSVAL(success);
-        cb->_paramVal[1] = std_string_to_jsval(s_cx, message);
+        cb->_paramVal[0] = JS::BooleanValue(success);
+        cb->_paramVal[1] = SB_STR_TO_JSVAL(s_cx, message);
         cb->_paramLen = 2;
         cb->schedule();
     }
     void onNotification(bool isActive, const std::string& message, const std::string& additionalData) {
         OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
         cb->_name = "onNotification";
-        cb->_paramVal[0] = BOOLEAN_TO_JSVAL(isActive);
-        cb->_paramVal[1] = std_string_to_jsval(s_cx, message);
-        cb->_paramVal[2] = std_string_to_jsval(s_cx, additionalData);
+        cb->_paramVal[0] = JS::BooleanValue(isActive);
+        cb->_paramVal[1] = SB_STR_TO_JSVAL(s_cx, message);
+        cb->_paramVal[2] = SB_STR_TO_JSVAL(s_cx, additionalData);
         cb->_paramLen = 3;
         cb->schedule();
     }
+    void onNotificationOpened(const std::string& message) {
+        OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
+        cb->_name = "onNotificationOpened";
+        cb->_paramVal[0] = SB_STR_TO_JSVAL(s_cx, message);
+        cb->_paramLen = 1;
+        cb->schedule();
+    }
+    void onNotificationReceived(const std::string& message) {
+        OneSignal_CallbackJS* cb = new OneSignal_CallbackJS();
+#if MOZJS_MAJOR_VERSION < 52
+        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#endif
+        cb->_name = __FUNCTION__;
+        cb->_paramVal[0] = SB_STR_TO_JSVAL(s_cx, message);
+        cb->_paramLen = 1;
+        cb->schedule();
+    }
 
-    void invokeJS(const char* func, jsval* pVals, int valueSize) {
+    void invokeJS(const char* func, JS::Value* pVals, int valueSize) {
         if (!s_cx) {
             return;
         }
         JSContext* cx = s_cx;
         const char* func_name = func;
-        JS::RootedObject obj(cx, _JSDelegate);
+        JS::RootedObject obj(cx, getJSDelegate());
         JSAutoCompartment ac(cx, obj);
 
 #if defined(MOZJS_MAJOR_VERSION)
@@ -103,7 +136,7 @@ public:
             if(!JS_GetProperty(cx, obj, func_name, &func_handle)) {
                 return;
             }
-            if(func_handle == JSVAL_VOID) {
+            if(func_handle == JS::NullValue()) {
                 return;
             }
 
@@ -132,7 +165,7 @@ _paramLen(0) {
 
 void OneSignal_CallbackJS::schedule() {
     retain();
-    cocos2d::CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(OneSignal_CallbackJS::notityJs), this, 0.1, false);
+    cocos2d::Director::getInstance()->getScheduler()->schedule(schedule_selector(OneSignal_CallbackJS::notityJs), this, 0.1, 0, 0.0f, false);
     autorelease();
 }
 
@@ -142,13 +175,12 @@ void OneSignal_CallbackJS::notityJs(float dt) {
     if (l) {
         l->invokeJS(_name.c_str(), _paramVal, _paramLen);
     }
-    cocos2d::CCDirector::sharedDirector()->getScheduler()->unscheduleAllForTarget(this);
     release();
 }
 
 #if defined(MOZJS_MAJOR_VERSION)
 #if MOZJS_MAJOR_VERSION >= 33
-bool js_PluginOneSignalJS_PluginOneSignal_setListener(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_PluginOneSignalJS_PluginOneSignal_setListener(JSContext *cx, uint32_t argc, JS::Value *vp)
 #else
 bool js_PluginOneSignalJS_PluginOneSignal_setListener(JSContext *cx, uint32_t argc, jsval *vp)
 #endif
@@ -166,17 +198,16 @@ JSBool js_PluginOneSignalJS_PluginOneSignal_setListener(JSContext *cx, uint32_t 
         {
             ok = false;
         }
-        JSObject *tmpObj = args.get(0).toObjectOrNull();
 
         JSB_PRECONDITION2(ok, cx, false, "js_PluginOneSignalJS_PluginOneSignal_setIAPListener : Error processing arguments");
         OneSignalListenerJS* wrapper = new OneSignalListenerJS();
-        wrapper->setJSDelegate(tmpObj);
+        wrapper->setJSDelegate(cx, args.get(0));
         sdkbox::PluginOneSignal::setListener(wrapper);
 
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_PluginOneSignalJS_PluginOneSignal_setIAPListener : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_PluginOneSignalJS_PluginOneSignal_setIAPListener : wrong number of arguments");
     return false;
 }
 
@@ -186,7 +217,8 @@ void onesignal_set_constants(JSContext* cx, const JS::RootedObject& obj, const s
 void onesignal_set_constants(JSContext* cx, JSObject* obj, const std::string& name, const std::map<std::string, int>& params)
 #endif
 {
-    jsval val = sdkbox::std_map_string_int_to_jsval(cx, params);
+    JS::RootedValue val(cx);
+    sdkbox::std_map_string_int_to_jsval(cx, params, &val);
 
     JS::RootedValue rv(cx);
     rv = val;

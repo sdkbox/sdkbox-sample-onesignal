@@ -16,6 +16,10 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="com.sdkbox.sample.onesignal.js" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="__manifestApplicationId__" />
+            </intent-filter>
         </receiver>
         <receiver android:name="com.onesignal.NotificationOpenedReceiver" />
         <service android:name="com.onesignal.GcmIntentService" />
@@ -42,4 +46,6 @@
     <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" />
     <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" />
     <permission android:name="com.sdkbox.sample.onesignal.js.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.__manifestApplicationId__.permission.C2D_MESSAGE" />
+    <permission android:name="__manifestApplicationId__.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 </manifest>

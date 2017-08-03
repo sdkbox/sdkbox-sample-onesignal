@@ -52,17 +52,17 @@ namespace sdkbox {
         static void registerForPushNotifications();
 
         /**
-         * Enable logging to help debug if you run into an issue setting up OneSignal. This selector 
-         * is static so you can call it before OneSignal init. The following options are available 
+         * Enable logging to help debug if you run into an issue setting up OneSignal. This selector
+         * is static so you can call it before OneSignal init. The following options are available
          * with increasingly more information;
-         * sdkbox::OneSignalLogNone, sdkbox::OneSignalLogFatal, sdkbox::OneSignalLogError, 
-         * sdkbox::OneSignalLogWarn, sdkbox::OneSignalLogInfo, sdkbox::OneSignalLogDebug, 
+         * sdkbox::OneSignalLogNone, sdkbox::OneSignalLogFatal, sdkbox::OneSignalLogError,
+         * sdkbox::OneSignalLogWarn, sdkbox::OneSignalLogInfo, sdkbox::OneSignalLogDebug,
          * sdkbox::OneSignalLogVerbose
          */
         static void setLogLevel(int logLevel, int visualLogLevel);
 
         /**
-         * Tag a user based on an app event of your choosing so later you can create segments on 
+         * Tag a user based on an app event of your choosing so later you can create segments on
          * onesignal.com to target these users.
          *
          * callback: `onSendTag`
@@ -87,7 +87,7 @@ namespace sdkbox {
         static void deleteTag(const std::string& key);
 
         /**
-         * Lets you retrieve the OneSignal user id and the Google registration id. Your handler is 
+         * Lets you retrieve the OneSignal user id and the Google registration id. Your handler is
          * called after the device is successfully registered with OneSignal.
          *
          * callback: `onIdsAvailable`
@@ -97,19 +97,19 @@ namespace sdkbox {
         /**
          * By default this is false and notifications will not be shown when the user is in your app,
          * instead the NotificationOpenedHandler is fired. If set to true notifications will be shown
-         * as native alert boxes if a notification is received when the user is in your app. The 
+         * as native alert boxes if a notification is received when the user is in your app. The
          * NotificationOpenedHandler is then fired after the alert box is closed.
          */
         static void enableInAppAlertNotification(bool enable);
 
         /**
-         * You can call this method with false to opt users out of receiving all notifications through 
+         * You can call this method with false to opt users out of receiving all notifications through
          * OneSignal. You can pass true later to opt users back into notifications.
          */
         static void setSubscription(bool enable);
 
         /**
-         * Allows you to send notifications from user to user or schedule ones in the future to be 
+         * Allows you to send notifications from user to user or schedule ones in the future to be
          * delivered to the current device.
          *
          * callback: `onPostNotification`
@@ -117,7 +117,7 @@ namespace sdkbox {
         static void postNotification(const std::string& jsonString);
 
         /**
-         * Prompts the user for location permissions. This allows for geotagging so you can send 
+         * Prompts the user for location permissions. This allows for geotagging so you can send
          * notifications to users based on location.
          *
          * Note: Make sure you also have the required location permission in your AndroidManifest.xml.
@@ -132,6 +132,8 @@ namespace sdkbox {
         virtual void onIdsAvailable(const std::string& userId, const std::string& pushToken) {}
         virtual void onPostNotification(bool success, const std::string& message) {}
         virtual void onNotification(bool isActive, const std::string& message, const std::string& additionalData) {}
+        virtual void onNotificationOpened(const std::string &message) {}
+        virtual void onNotificationReceived(const std::string& message) {}
     };
 }
 
